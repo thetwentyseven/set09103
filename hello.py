@@ -14,6 +14,10 @@ def hello():
 def page_not_found(error):
   return "Could not find the page you requested.", 404
 
+@app.route("/force404/")
+def force404():
+  abort(404)
+
 @app.route("/goodbye/")
 def goodbye():
  return "Goodbye cruel world :("
