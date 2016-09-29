@@ -6,4 +6,4 @@ Hello Simon,
              images from folders that also apply to any element that we want to
              get and display it on the screen
 
-- Chapter 4: 
+- Chapter 4: Creating request with POST, GET. Excercises about request.method
