@@ -9,6 +9,11 @@ def root():
 def hello():
  return "Hello Napier!!! :D"
 
+# Now I am going to create a 404 error
+@app.errorhandler(404)
+def page_not_found(error):
+  return "Could not find the page you requested.", 404
+
 @app.route("/goodbye/")
 def goodbye():
  return "Goodbye cruel world :("
