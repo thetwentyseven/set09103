@@ -9,14 +9,17 @@ def root():
 def hello():
  return "Hello Napier!!! :D"
 
-# Now I am going to create a 404 error
 @app.errorhandler(404)
 def page_not_found(error):
   return "Could not find the page you requested.", 404
 
-@app.route("/force404/")
-def force404():
-  abort(404)
+# This set a new url where will be an img
+@app.route('/static/img')
+def static_img():
+  start = '<img src="'
+  url = url_for('static', filename='vmask.jpg')
+  end = '">'
+  return start+url+end, 200
 
 @app.route("/goodbye/")
 def goodbye():
