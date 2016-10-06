@@ -1,14 +1,25 @@
 from flask import Flask, request
 app = Flask(__name__)
 
-# Chapter 4.1.4, url and parameters
-@app.route("/hello/")
-def hello():
-  name = request.args.get('name','')
-  if name == '':
-    return "No parameters supplied"
+# Chapter 4.1.5, uploading files
+@app.route("/account/", methods=['POST','GET'])
+def account():
+  if request.method == 'POST':
+    f = request.files['datafile']
+    f.save('static/uploads/upload.png')
+    return "File Uploaded"
   else:
-    return "Hello %s" % name
+    page = '''
+    <html>
+    <body>
+      <form action="" method="post" name="form" enctype="multipart/form-data">
+        <input type="file" name="datafile" />
+        <input type="submit" name="submit" id="submit" />
+      </form>
+    </body>
+    </html>
+    '''
+    return page, 200
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)
