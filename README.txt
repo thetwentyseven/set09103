@@ -7,3 +7,6 @@ Hello Simon,
              get and display it on the screen
 
 - Chapter 4: Creating request with POST, GET. Excercises about request.method
+
+- Chapter 5: HTML Templates using Jinja2
+
