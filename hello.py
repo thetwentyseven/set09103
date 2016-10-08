@@ -1,18 +1,43 @@
-from flask import Flask, render_template
+import ConfigParser
+
+from flask import Flask
+
 app = Flask(__name__)
 
-# Chapter 5.0.4, creating different templates for different content
-@app.route('/inherits/')
-def inherits():
-  return render_template('base.html')
+@app.route('/')
+def root():
+  return "Hello Napier from the configuration testing app"
 
-@app.route('/inherits/one/')
-def inherits_one():
-  return render_template('inherits1.html')
+@app.route('/config/')
+def config():
+  str = []
+  str.append('This is the data of the config file: <br />')
+  str.append('Debug:'+app.config['DEBUG'])
+  str.append('Port:'+app.config['port'])
+  str.append('URL:'+app.config['url'])
+  str.append('IP Address:'+app.config['ip_address'])
+  return '<br />'.join(str)
 
-@app.route('/inherits/two/')
-def inherits_two():
-  return render_template('inherits2.html')
+def init(app):
+  config = ConfigParser.ConfigParser()
+  try:
+      config_location = "etc/defaults.cfg"
+      config.read(config_location)
 
-if __name__ == "__main__":
-  app.run(host='0.0.0.0', debug=True)
+      app.config['DEBUG'] = config.get("config", "debug")
+      app.config['ip_address'] = config.get("config", "ip_address")
+      app.config['port'] = config.get("config", "port")
+      app.config['url'] = config.get("config", "url")
+
+  except:
+      print "Could not read configs from: ", config_location
+
+if __name__ == '__main__':
+  init(app)
+  app.run(
+          host = app.config['ip_address'],
+          port = int(app.config['port'])
+          )
+
+
+
