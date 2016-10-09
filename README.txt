@@ -11,3 +11,6 @@ Hello Simon,
 - Chapter 5: HTML Templates using Jinja2
 
 - Chapter 6: Configs, session, flashing, logging and testing
+
+- Chapter 7: Bootstrap
+
